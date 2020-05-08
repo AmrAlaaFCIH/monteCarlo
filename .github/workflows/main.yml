@@ -36,6 +36,5 @@ jobs:
         GH_TOKEN: ${{secrets.TOKEB}}  
       run: npm run build
     
-    - name: publish
-      run: npm run release 
+
      
