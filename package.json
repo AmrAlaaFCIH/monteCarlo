@@ -53,6 +53,9 @@
   },
   "build": {
     "appId": "com.amr.simulation",
+    "publish":{
+      "provider":"github"
+    },
     "win": {
       "target": "zip",
       "certificateFile": "simulation.pfx",
