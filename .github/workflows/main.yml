@@ -19,9 +19,23 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        always-auth: true
+        node-version: '12.x'
+        registry-url: https://registry.npmjs.org
+        scope: '@octocat'
 
     # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      run: |
-        dir 
+    - name: install dependencies
+      run: npm install 
+    
+    - name: project build
+      run: npm run build
+    
+    - name: publish
+      env:
+        GH_Token: d02bc223884f13181c37c25fd2a75caee0cca56f
+      run: npm run release 
+     
