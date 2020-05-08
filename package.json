@@ -1,0 +1,65 @@
+{
+  "name": "simulationproject",
+  "version": "1.0.0",
+  "description": "Monte Carlo Simulation App",
+  "main": "public/electron.js",
+  "scripts": {
+    "start": "concurrently \"set PORT=4000 && react-scripts start\" \"nodemon --exec electron .\"",
+    "build": "react-scripts build && electron-builder -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmrAlaaFCIH/monteCarlo.git"
+  },
+  "author": "Amr Alaa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmrAlaaFCIH/monteCarlo/issues"
+  },
+  "homepage": ".",
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "electron": "^8.2.5",
+    "electron-builder": "^22.6.0",
+    "nodemon": "^2.0.3"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "electron-is-dev": "^1.2.0",
+    "electron-window-state": "^5.0.3",
+    "lodash": "^4.17.15",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1",
+    "reactstrap": "^8.4.1"
+  },
+  "build": {
+    "appId": "com.amr.simulation",
+    "win": {
+      "target": "zip",
+      "certificateFile": "simulation.pfx",
+      "certificatePassword": "",
+      "publisherName": "Amr"
+    },
+    "directories":{
+      "buildResources": "builder"
+    }
+  }
+}

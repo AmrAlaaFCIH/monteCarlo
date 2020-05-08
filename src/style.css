@@ -1,0 +1,18 @@
+body{
+    font-family: cursive !important;
+}
+table{
+    padding: 20px;
+}
+
+table *{
+    text-align: center !important;
+}
+
+button {
+    margin: 20px;
+}
+
+p {
+    margin-left: 10px;
+}
