@@ -33,7 +33,7 @@ jobs:
     
     - name: project build
       env:
-        GH_TOKEN: d02bc223884f13181c37c25fd2a75caee0cca56f  
+        GH_TOKEN: ${{secrets.GH_TOKEB}}  
       run: npm run build
     
     - name: publish
