@@ -35,7 +35,5 @@ jobs:
       run: npm run build
     
     - name: publish
-      env:
-        GH_Token: d02bc223884f13181c37c25fd2a75caee0cca56f
-      run: npm run release 
+      run: set GH_TOKEN=${{ secrets.TOKEB }} && npm run release 
      
