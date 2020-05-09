@@ -12,10 +12,7 @@ module.exports=()=>{
         width:winState.width,
         x:winState.x,
         y:winState.y,
-        show:false,
-        webPreferences:{
-            nodeIntegration:true
-        }
+        show:false
     })
     Window.setMenu(null);
     winState.manage(Window);
