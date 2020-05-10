@@ -1,18 +1,17 @@
 import React, { useContext } from "react";
-import { Table } from "reactstrap";
+import { Table , Alert } from "reactstrap";
 import { AppContext } from "../contextAPI/appContext";
 
 const Table2 = () => {
   const { simSum, expected, random, sim } = useContext(AppContext);
   return (
     <div>
-      <p>Ten days simulation</p>
-      <p>
-        {`simulated Average daily demand is ${
+      <Alert color="success">
+        {`simulated Average daily demand for 10 days is ${
           simSum / 10
         } and expected daily demand is ${expected}`}{" "}
         and You Can Try Again
-      </p>
+      </Alert>
       <Table hover>
         <thead>
           <tr>

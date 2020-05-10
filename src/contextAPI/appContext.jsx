@@ -1,5 +1,5 @@
-import React, { Component} from "react";
-import _ from 'lodash';
+import React, { Component } from "react";
+import _ from "lodash";
 
 export const AppContext = React.createContext();
 
@@ -7,16 +7,24 @@ class AppProvider extends Component {
   state = {
     demands: {},
     Frequency: {},
+    leadTime: {},
+    FrequencyForL: {},
     prob: [],
+    probForL: [],
     cum: [],
+    cumForL: [],
     randomNumbers: [],
+    randomNumbersForL: [],
     random: [],
+    randomForL: [],
     sim: [],
+    simForL: [],
     expected: 0,
     simSum: 0,
-    sumF: 0,
     rows: "",
+    rowsForL: "",
     secondTable: false,
+    modalType: "",
   };
 
   onInputChangeD = (e) => {
@@ -31,6 +39,16 @@ class AppProvider extends Component {
       expected: 0,
     });
   };
+  onInputChangeDForL = (e) => {
+    this.setState({
+      leadTime: { ...this.state.leadTime, [e.target.name]: e.target.value },
+      probForL: [],
+      cumForL: [],
+      randomNumbersForL: [],
+      randomForL: [],
+      simForL: [],
+    });
+  };
   onInputChangeF = (e) => {
     this.setState({
       Frequency: { ...this.state.Frequency, [e.target.name]: e.target.value },
@@ -43,7 +61,19 @@ class AppProvider extends Component {
       expected: 0,
     });
   };
-
+  onInputChangeFForL = (e) => {
+    this.setState({
+      FrequencyForL: {
+        ...this.state.FrequencyForL,
+        [e.target.name]: e.target.value,
+      },
+      probForL: [],
+      cumForL: [],
+      randomNumbersForL: [],
+      randomForL: [],
+      simForL: [],
+    });
+  };
   getRowNumber = (e) => {
     this.setState({
       rows: e.target.value,
@@ -57,6 +87,18 @@ class AppProvider extends Component {
       expected: 0,
       Frequency: {},
       demands: {},
+    });
+  };
+  getRowNumberForL = (e) => {
+    this.setState({
+      rowsForL: e.target.value,
+      probForL: [],
+      cumForL: [],
+      randomNumbersForL: [],
+      randomForL: [],
+      simForL: [],
+      FrequencyForL: {},
+      leadTime: {},
     });
   };
 
@@ -113,6 +155,92 @@ class AppProvider extends Component {
     });
   };
 
+  getFSumForL = (e) => {
+    let parse = Number.parseInt;
+    let sum = Object.values(this.state.Frequency).reduce(
+      (a, b) => parse(a) + parse(b),
+      0
+    );
+    let probArr = Object.values(this.state.Frequency).map((value) =>
+      parseFloat((value / sum).toFixed(2))
+    );
+    let cumprob = [];
+    probArr.reduce(
+      (a, b, i) => (cumprob[i] = parseFloat(parseFloat(a + b).toFixed(2))),
+      0
+    );
+    let rndm = [];
+    for (let i = 0; i < cumprob.length; i++) {
+      rndm.push([
+        ..._.range(
+          i === 0 ? 1 : cumprob[i - 1] * 100 + 1,
+          cumprob[i] * 100 + 1
+        ),
+      ]);
+    }
+    let exprndm = [];
+    for (let i = 1; i <= 10; i++) {
+      exprndm.push(_.random(1, 100, false));
+    }
+    let newArr = [];
+    exprndm.forEach((num) => {
+      rndm.forEach((list, i) => {
+        if (list.includes(num)) {
+          newArr.push(Object.values(this.state.demands)[i]);
+        }
+      });
+    });
+    let sumForL = Object.values(this.state.FrequencyForL).reduce(
+      (a, b) => parse(a) + parse(b),
+      0
+    );
+    let probArrForL = Object.values(this.state.FrequencyForL).map((value) =>
+      parseFloat((value / sumForL).toFixed(2))
+    );
+    let cumprobForL = [];
+    probArrForL.reduce(
+      (a, b, i) => (cumprobForL[i] = parseFloat(parseFloat(a + b).toFixed(2))),
+      0
+    );
+    let rndmForL = [];
+    for (let i = 0; i < cumprobForL.length; i++) {
+      rndmForL.push([
+        ..._.range(
+          i === 0 ? 1 : cumprobForL[i - 1] * 100 + 1,
+          cumprobForL[i] * 100 + 1
+        ),
+      ]);
+    }
+    let exprndmForL = [];
+    for (let i = 1; i <= 10; i++) {
+      exprndmForL.push(_.random(1, 100, false));
+    }
+    let newArrForL = [];
+    exprndmForL.forEach((num) => {
+      rndmForL.forEach((list, i) => {
+        if (list.includes(num)) {
+          newArrForL.push(Object.values(this.state.leadTime)[i]);
+        }
+      });
+    });
+    this.setState({
+      prob: probArr,
+      cum: cumprob,
+      randomNumbers: rndm,
+      random: exprndm,
+      sim: newArr,
+      probForL: probArrForL,
+      cumForL: cumprobForL,
+      randomNumbersForL: rndmForL,
+      randomForL: exprndmForL,
+      simForL: newArrForL,
+    });
+  };
+
+  onModelChange = (e) => {
+    this.setState({ modalType: e.target.value });
+  };
+
   render() {
     const {
       demands,
@@ -124,12 +252,30 @@ class AppProvider extends Component {
       sim,
       expected,
       simSum,
-      sumF,
       rows,
       secondTable,
+      modalType,
+      leadTime,
+      FrequencyForL,
+      probForL,
+      cumForL,
+      randomNumbersForL,
+      randomForL,
+      simForL,
+      rowsForL,
     } = this.state;
 
-    const { onInputChangeD, onInputChangeF, getRowNumber, getFSum } = this;
+    const {
+      onInputChangeD,
+      onInputChangeF,
+      getRowNumber,
+      getFSum,
+      onModelChange,
+      getRowNumberForL,
+      onInputChangeFForL,
+      onInputChangeDForL,
+      getFSumForL,
+    } = this;
 
     return (
       <AppContext.Provider
@@ -143,16 +289,29 @@ class AppProvider extends Component {
           sim,
           expected,
           simSum,
-          sumF,
           rows,
           secondTable,
           onInputChangeD,
           onInputChangeF,
           getRowNumber,
-          getFSum
+          getFSum,
+          onModelChange,
+          modalType,
+          leadTime,
+          FrequencyForL,
+          probForL,
+          cumForL,
+          randomNumbersForL,
+          randomForL,
+          simForL,
+          rowsForL,
+          getRowNumberForL,
+          onInputChangeFForL,
+          onInputChangeDForL,
+          getFSumForL,
         }}
       >
-          {this.props.children}
+        {this.props.children}
       </AppContext.Provider>
     );
   }

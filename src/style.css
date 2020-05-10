@@ -1,5 +1,6 @@
 body{
     font-family: cursive !important;
+    overflow-x: hidden;
 }
 table{
     padding: 20px;
@@ -15,4 +16,16 @@ button {
 
 p {
     margin-left: 10px;
+}
+
+.inputter{
+    width: 150px !important;
+}
+
+.right{
+    padding-right: 0px !important;
+}
+
+.left{
+    padding-left: 0px !important;
 }

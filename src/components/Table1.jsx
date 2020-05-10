@@ -30,7 +30,7 @@ const Table1 = () => {
           for (let i = 1; i <= rows; i++) {
             eleArray.push(
               <tr key={`${i}tr`}>
-                <td>
+                <td className="inputter">
                   <Input
                     type="number"
                     name={`d${i}`}
@@ -38,7 +38,7 @@ const Table1 = () => {
                     value={demands[`d${i}`]}
                   />
                 </td>
-                <td>
+                <td className="inputter">
                   <Input
                     type="number"
                     name={`f${i}`}
