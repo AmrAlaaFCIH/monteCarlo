@@ -28,6 +28,10 @@ class AppProvider extends Component {
     orderQ: "",
     reOrderPonit: "",
     showResultTable: false,
+    year: "",
+    orderCost: "",
+    holdCost: "",
+    lostCost: "",
   };
 
   onInputChangeD = (e) => {
@@ -109,6 +113,10 @@ class AppProvider extends Component {
       showResultTable: false,
       orderQ: "",
       reOrderPonit: "",
+      year: "",
+      orderCost: "",
+      holdCost: "",
+      lostCost: "",
     });
   };
 
@@ -259,6 +267,19 @@ class AppProvider extends Component {
     this.setState({ modalType: e.target.value });
   };
 
+  setYear = (e) => {
+    this.setState({ year: e.target.value });
+  };
+  setOrderCost = (e) => {
+    this.setState({ orderCost: e.target.value });
+  };
+  setHoldCost = (e) => {
+    this.setState({ holdCost: e.target.value });
+  };
+  setLostCost = (e) => {
+    this.setState({ lostCost: e.target.value });
+  };
+
   render() {
     const {
       demands,
@@ -284,6 +305,10 @@ class AppProvider extends Component {
       showResultTable,
       orderQ,
       reOrderPonit,
+      year,
+      orderCost,
+      holdCost,
+      lostCost,
     } = this.state;
 
     const {
@@ -298,11 +323,23 @@ class AppProvider extends Component {
       getFSumForL,
       getOrderQ,
       getReorder,
+      setHoldCost,
+      setLostCost,
+      setOrderCost,
+      setYear,
     } = this;
 
     return (
       <AppContext.Provider
         value={{
+          year,
+          orderCost,
+          holdCost,
+          lostCost,
+          setHoldCost,
+          setLostCost,
+          setOrderCost,
+          setYear,
           orderQ,
           reOrderPonit,
           getReorder,
