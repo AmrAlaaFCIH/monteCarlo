@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently \"set PORT=4000 && react-scripts start\" \"nodemon --exec electron .\"",
     "build": "react-scripts build && electron-builder -w",
-    "release":"electron-builder -w -p 'onTagOrDraft'"
+    "release": "electron-builder -w -p 'onTagOrDraft'"
   },
   "repository": "https://github.com/AmrAlaaFCIH/monteCarlo",
   "author": "Amr Alaa",
@@ -45,13 +45,14 @@
     "lodash": "^4.17.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "reactstrap": "^8.4.1"
   },
   "build": {
     "appId": "com.amr.simulation",
-    "publish":{
-      "provider":"github"
+    "publish": {
+      "provider": "github"
     },
     "win": {
       "target": "zip",
@@ -59,7 +60,7 @@
       "certificatePassword": "",
       "publisherName": "Amr"
     },
-    "directories":{
+    "directories": {
       "buildResources": "builder"
     }
   }

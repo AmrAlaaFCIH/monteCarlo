@@ -25,6 +25,9 @@ class AppProvider extends Component {
     rowsForL: "",
     secondTable: false,
     modalType: "",
+    orderQ: "",
+    reOrderPonit: "",
+    showResultTable: false,
   };
 
   onInputChangeD = (e) => {
@@ -37,6 +40,7 @@ class AppProvider extends Component {
       sim: [],
       simSum: 0,
       expected: 0,
+      showResultTable: false,
     });
   };
   onInputChangeDForL = (e) => {
@@ -47,6 +51,7 @@ class AppProvider extends Component {
       randomNumbersForL: [],
       randomForL: [],
       simForL: [],
+      showResultTable: false,
     });
   };
   onInputChangeF = (e) => {
@@ -59,6 +64,7 @@ class AppProvider extends Component {
       sim: [],
       simSum: 0,
       expected: 0,
+      showResultTable: false,
     });
   };
   onInputChangeFForL = (e) => {
@@ -72,6 +78,7 @@ class AppProvider extends Component {
       randomNumbersForL: [],
       randomForL: [],
       simForL: [],
+      showResultTable: false,
     });
   };
   getRowNumber = (e) => {
@@ -99,7 +106,17 @@ class AppProvider extends Component {
       simForL: [],
       FrequencyForL: {},
       leadTime: {},
+      showResultTable: false,
+      orderQ: "",
+      reOrderPonit: "",
     });
+  };
+
+  getOrderQ = (e) => {
+    this.setState({ orderQ: e.target.value });
+  };
+  getReorder = (e) => {
+    this.setState({ reOrderPonit: e.target.value });
   };
 
   getFSum = (e) => {
@@ -234,6 +251,7 @@ class AppProvider extends Component {
       randomNumbersForL: rndmForL,
       randomForL: exprndmForL,
       simForL: newArrForL,
+      showResultTable: true,
     });
   };
 
@@ -263,6 +281,9 @@ class AppProvider extends Component {
       randomForL,
       simForL,
       rowsForL,
+      showResultTable,
+      orderQ,
+      reOrderPonit,
     } = this.state;
 
     const {
@@ -275,11 +296,17 @@ class AppProvider extends Component {
       onInputChangeFForL,
       onInputChangeDForL,
       getFSumForL,
+      getOrderQ,
+      getReorder,
     } = this;
 
     return (
       <AppContext.Provider
         value={{
+          orderQ,
+          reOrderPonit,
+          getReorder,
+          getOrderQ,
           demands,
           Frequency,
           prob,
@@ -309,6 +336,7 @@ class AppProvider extends Component {
           onInputChangeFForL,
           onInputChangeDForL,
           getFSumForL,
+          showResultTable,
         }}
       >
         {this.props.children}

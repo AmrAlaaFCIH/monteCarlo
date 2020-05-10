@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Table, Input, Button } from "reactstrap";
 import { AppContext } from "../contextAPI/appContext";
+import Table4 from "./Table4";
 
 const Table3 = () => {
   const {
@@ -13,7 +14,8 @@ const Table3 = () => {
     getFSumForL,
     probForL,
     cumForL,
-    randomNumbersForL
+    randomNumbersForL,
+    showResultTable
   } = useContext(AppContext);
   return (
     <div>
@@ -81,6 +83,7 @@ const Table3 = () => {
           </Button>
         </div>
       ) : null}
+      {showResultTable?<Table4 />:null}
     </div>
   );
 };

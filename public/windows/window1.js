@@ -5,14 +5,17 @@ const isDev=require('electron-is-dev');
 module.exports=()=>{
     let winState=WindowState({
         defaultHeight:1000,
-        defaultWidth:1000
+        defaultWidth:1200
     })
     let Window=new BrowserWindow({
         height:winState.height,
         width:winState.width,
         x:winState.x,
         y:winState.y,
-        show:false
+        show:false,
+        webPreferences:{
+            nativeWindowOpen:true
+        }
     })
     Window.setMenu(null);
     winState.manage(Window);
